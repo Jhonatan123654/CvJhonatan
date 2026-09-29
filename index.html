@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Curriculum Vitae</title>
+  <style>
+    /* Estilos generales */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f2f5;
+      color: #333;
+      padding-bottom: 40px;
+    }
+
+    /* Barra de herramientas superior (No se imprime) */
+    .toolbar {
+      position: sticky;
+      top: 0;
+      background: #1e293b;
+      color: white;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    .btn {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #2563eb; }
+    .btn-danger { background: #ef4444; }
+    .btn-danger:hover { background: #dc2626; }
+
+    /* Hoja del Curriculum */
+    .cv-container {
+      max-width: 800px;
+      margin: 30px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 30px;
+    }
+
+    /* Indicador visual de texto editable */
+    [contenteditable="true"] {
+      outline: 1px dashed transparent;
+      padding: 2px 4px;
+      border-radius: 4px;
+      transition: outline 0.2s, background 0.2s;
+    }
+    [contenteditable="true"]:hover {
+      outline: 1px dashed #3b82f6;
+      background: #f0f7ff;
+    }
+    [contenteditable="true"]:focus {
+      outline: 2px solid #2563eb;
+      background: #ffffff;
+    }
+
+    /* Columna Izquierda */
+    .sidebar {
+      border-right: 2px solid #f1f5f9;
+      padding-right: 20px;
+    }
+    .sidebar h2 { font-size: 1.1rem; color: #1e293b; margin-top: 20px; margin-bottom: 10px; text-transform: uppercase; }
+    .contact-info p, .skills-list li { font-size: 0.9rem; margin-bottom: 8px; color: #475569; }
+    .skills-list { list-style: none; }
+
+    /* Columna Derecha */
+    .main-content h1 { font-size: 2rem; color: #0f172a; }
+    .job-title { font-size: 1.1rem; color: #3b82f6; font-weight: 600; margin-bottom: 20px; }
+    .section-title { font-size: 1.2rem; color: #1e293b; border-bottom: 2px solid #3b82f6; padding-bottom: 4px; margin: 24px 0 12px 0; }
+    .experience-item, .education-item { margin-bottom: 16px; }
+    .item-header { display: flex; justify-content: space-between; font-weight: bold; color: #334155; }
+    .item-sub { font-size: 0.85rem; color: #64748b; margin-bottom: 6px; }
+
+    /* Ocultar la barra de herramientas al imprimir o guardar en PDF */
+    @media print {
+      body { background: white; padding: 0; }
+      .toolbar { display: none; }
+      .cv-container { box-shadow: none; margin: 0; width: 100%; max-width: 100%; padding: 0; }
+      [contenteditable="true"]:hover { outline: none; background: transparent; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra de Herramientas -->
+  <div class="toolbar">
+    <button class="btn" onclick="descargarPDF()">🖨️ Descargar en PDF / Imprimir</button>
+    <button class="btn btn-danger" onclick="restaurarCV()">🔄 Restablecer Ejemplo</button>
+  </div>
+
+  <!-- Plantilla del Curriculum -->
+  <div class="cv-container" id="cv-content">
+    
+    <!-- Columna Izquierda (Contacto e Información) -->
+    <aside class="sidebar">
+      <h2>Contacto</h2>
+      <div class="contact-info">
+        <p><strong>Email:</strong> <span contenteditable="true">tuemail@correo.com</span></p>
+        <p><strong>Teléfono:</strong> <span contenteditable="true">+502 1234 5678</span></p>
+        <p><strong>Ubicación:</strong> <span contenteditable="true">Ciudad de Guatemala</span></p>
+        <p><strong>LinkedIn:</strong> <span contenteditable="true">linkedin.com/in/usuario</span></p>
+      </div>
+
+      <h2>Habilidades</h2>
+      <ul class="skills-list">
+        <li contenteditable="true">HTML5 / CSS3 / JavaScript</li>
+        <li contenteditable="true">Gestión de Proyectos</li>
+        <li contenteditable="true">Resolución de Problemas</li>
+        <li contenteditable="true">Inglés Intermedio</li>
+      </ul>
+
+      <h2>Idiomas</h2>
+      <div class="contact-info">
+        <p><span contenteditable="true">Español</span> - <span contenteditable="true">Nativo</span></p>
+        <p><span contenteditable="true">Inglés</span> - <span contenteditable="true">B2 Avanzado</span></p>
+      </div>
+    </aside>
+
+    <!-- Columna Derecha (Perfil y Experiencia) -->
+    <main class="main-content">
+      <h1 contenteditable="true">Tu Nombre Completo</h1>
+      <div class="job-title" contenteditable="true">Desarrollador Web / Tu Profesión</div>
+
+      <div class="section-title">Perfil Profesional</div>
+      <p contenteditable="true">
+        Profesional apasionado por el desarrollo web y la tecnología. Con capacidad para aprender rápidamente nuevas herramientas, trabajar en equipo y resolver problemas complejos con código limpio y eficiente.
+      </p>
+
+      <div class="section-title">Experiencia Laboral</div>
+      
+      <div class="experience-item">
+        <div class="item-header">
+          <span contenteditable="true">Desarrollador Frontend</span>
+          <span contenteditable="true">2023 - Presente</span>
+        </div>
+        <div class="item-sub" contenteditable="true">Empresa de Tecnología, S.A.</div>
+        <p contenteditable="true">
+          Desarrollo de interfaces dinámicas con HTML, CSS y JavaScript. Optimización del rendimiento del sitio web y colaboración con diseñadores UX/UI.
+        </p>
+      </div>
+
+      <div class="experience-item">
+        <div class="item-header">
+          <span contenteditable="true">Asistente Técnico</span>
+          <span contenteditable="true">2021 - 2023</span>
+        </div>
+        <div class="item-sub" contenteditable="true">Servicios Digitales</div>
+        <p contenteditable="true">
+          Mantenimiento de bases de datos, soporte al cliente y actualización de contenidos en la plataforma web de la empresa.
+        </p>
+      </div>
+
+      <div class="section-title">Educación</div>
+      
+      <div class="education-item">
+        <div class="item-header">
+          <span contenteditable="true">Licenciatura / Ingeniería en Sistemas</span>
+          <span contenteditable="true">2019 - 2023</span>
+        </div>
+        <div class="item-sub" contenteditable="true">Universidad de Ejemplo</div>
+      </div>
+    </main>
+
+  </div>
+
+  <script>
+    const cvContent = document.getElementById('cv-content');
+
+    // 1. Cargar datos guardados en el navegador al abrir la página
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedData = localStorage.getItem('mi_cv_guardado');
+      if (savedData) {
+        cvContent.innerHTML = savedData;
+      }
+    });
+
+    // 2. Guardar automáticamente cualquier cambio al editar un texto
+    cvContent.addEventListener('input', () => {
+      localStorage.setItem('mi_cv_guardado', cvContent.innerHTML);
+    });
+
+    // 3. Función para descargar/guardar en PDF mediante la ventana de impresión
+    function descargarPDF() {
+      window.print();
+    }
+
+    // 4. Restaurar el contenido original si deseas borrar los cambios
+    function restaurarCV() {
+      if (confirm('¿Seguro que deseas borrar tus datos y restaurar la plantilla de ejemplo?')) {
+        localStorage.removeItem('mi_cv_guardado');
+        location.reload();
+      }
+    }
+  </script>
+</body>
+</html>
